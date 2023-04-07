@@ -1,0 +1,31 @@
+version: "3"
+services:
+  wifi:
+    container_name: wifi
+    build:
+      dockerfile: Dockerfile
+      context: .
+      args:
+        - PROXY=http://IP:PORT
+    volumes:
+      - ".:/var/www/"
+    ports:
+      - "8010:80"
+    networks:
+      - wifi_network
+  pgsql:
+    container_name: pgsql
+    image: postgres:14.5-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=wifi
+      - POSTGRES_USER=wifi
+      - POSTGRES_PASSWORD=qaz/8520*963.
+    volumes:
+      - "./data:/var/lib/postgresql/data"
+    networks:
+      - wifi_network
+networks:
+  wifi_network:
+    driver: bridge
