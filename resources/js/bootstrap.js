@@ -8,7 +8,11 @@ window._ = _;
  */
 
 import axios from 'axios';
+import { ref, reactive } from 'vue'
+
 window.axios = axios;
+window.ref = ref 
+window.reactive = reactive 
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
